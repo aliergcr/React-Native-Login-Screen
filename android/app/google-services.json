@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "440334477324",
+    "firebase_url": "https://sillion-aa6df-default-rtdb.firebaseio.com",
+    "project_id": "sillion-aa6df",
+    "storage_bucket": "sillion-aa6df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440334477324:android:7e6109d98f3b469449a629",
+        "android_client_info": {
+          "package_name": "com.sillion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440334477324-akefhb3sbvdiogf2p716csjnvl1l1bf0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6edFdm8AzwbTzvjh1SMO4G6tJv8AK2mM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440334477324-akefhb3sbvdiogf2p716csjnvl1l1bf0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
