@@ -1,18 +1,19 @@
 # React Native Login Screen Example
 
 <p align="center">
-<img src="screenshots/signUp.png" alt="alt text" width="250" height="520">
-<img src="ScreenImage/signIn.png" alt="alt text" width="250" height="520">
+<img src="screenshots/signUp.png" alt="alt text" width="138" height="298">
+<img src="screenshots/signIn.png" alt="alt text" width="138" height="298">
   </p>
   <p align="center">
-<img src="ScreenImage/invalidEmail.png" alt="alt text" width="250" height="520">
-  <img src="ScreenImage/password_1.png" alt="alt text" width="250" height="520">
-  <img src="ScreenImage/password_2.png" alt="alt text" width="250" height="520">
-  <img src="ScreenImage/resetPassword.png" alt="alt text" width="250" height="520">
-  <img src="ScreenImage/changePassword.png" alt="alt text" width="250" height="520">
-</p>
-<p align="center">
-  <img src="ScreenImage/4.png" alt="alt text" width="500" height="500">
+<img src="screenshots/invalidEmail.png" alt="alt text" width="138" height="298">
+  <img src="screenshots/password_1.png" alt="alt text" width="138" height="298">
+  <img src="screenshots/password_2.png" alt="alt text" width="138" height="298">
+  </p>
+  <p align="center">
+  <img src="screenshots/resetPassword.png" alt="alt text" width="138" height="298">
+  <img src="screenshots/changePassword.png" alt="alt text" width="138" height="298">
+  <img src="screenshots/toastMessage.png" alt="alt text" width="138" height="298">
+  <img src="screenshots/profileScreen.png" alt="alt text" width="138" height="298">
 </p>
 
 ## Instalition
