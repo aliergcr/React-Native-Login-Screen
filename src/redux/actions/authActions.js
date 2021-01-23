@@ -170,7 +170,6 @@ export const loginUser = (email, password) => {
       const { user } = await auth().signInWithEmailAndPassword(email, password);
       userData = user;
     } catch (error) {
-      console.log(error);
       switch (error.code) {
         case 'auth/invalid-email':
           Toast.show({

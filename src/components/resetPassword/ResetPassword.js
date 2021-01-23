@@ -105,18 +105,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    ...Platform.select({
-      android: {
-        backgroundColor: 'rgba(0,0,0,0.62)',
-      },
-    }),
+    backgroundColor: 'rgba(50,50,50,0.4)',
   },
   modal_container: {
     marginLeft: 30,
     marginRight: 30,
     ...Platform.select({
       ios: {
-        backgroundColor: '#E3E6E7',
+        backgroundColor: '#fff',
         borderRadius: 10,
         minWidth: 300,
       },
