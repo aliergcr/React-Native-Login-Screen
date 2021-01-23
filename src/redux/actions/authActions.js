@@ -68,10 +68,7 @@ export const changePassword = (password, newPassword) => {
       return dispatch({ type: AUTH_CHANGE_PASSWORD_FAIL, payload: error });
     }
     try {
-      await firebaseUser
-        .updatePassword(newPassword)
-        .then((res) => {})
-        .catch((error) => {});
+      await firebaseUser.updatePassword(newPassword);
       Toast.show({
         type: 'success',
         position: 'top',
