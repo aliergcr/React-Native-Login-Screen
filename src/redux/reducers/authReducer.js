@@ -20,8 +20,6 @@ const initialState = {
   data: {
     userId: null,
     createdAt: null,
-    //token: null,
-    //deviceId: null,
     email: null,
   },
   loading: false,
@@ -39,7 +37,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: action.paload,
+        error: action.payload,
         login: false,
       };
     case AUTH_USER_CREATE_SUCCESS:

@@ -24,13 +24,13 @@ export default function LoginForm({
     defaultValues: { ...data },
   });
 
-  const { loading } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.auth);
 
   const onSubmitHandler = (data) => {
     if (data.password !== data.confirmPassword && isNewUser) {
       return setError('confirmPassword', {
         type: 'validate',
-        message: 'Şifreler uyuşmuyor',
+        message: 'Passwords are not equal',
       });
     }
     onSubmit(data);
@@ -45,7 +45,7 @@ export default function LoginForm({
 
   return (
     <>
-      <Text style={[styles.title]}>{isNewUser ? 'Kayıt' : 'Giriş'}</Text>
+      <Text style={[styles.title]}>{isNewUser ? 'Sign Up' : 'Sign In'}</Text>
       <Controller
         control={control}
         render={({ onChange, value }) => (
@@ -71,7 +71,7 @@ export default function LoginForm({
         rules={{
           required: {
             value: true,
-            message: 'E-mail alanı boş bırakılamaz.',
+            message: 'Enter your e-mail address',
           },
         }}
       />
@@ -85,7 +85,7 @@ export default function LoginForm({
             <TextInput
               style={styles.body}
               secureTextEntry={true}
-              placeholder="Şifre"
+              placeholder="Password"
               onChangeText={(value) => onChange(value.trim())}
               onFocus={() => clearErrors('password')}
               value={value}
@@ -99,11 +99,11 @@ export default function LoginForm({
         rules={{
           required: {
             value: true,
-            message: 'Şifre alanı boş bırakılamaz.',
+            message: 'Password is required.',
           },
           minLength: {
             value: 6,
-            message: 'Şifreniz en az 6 karakterden oluşmalıdır',
+            message: 'Password must be at least 6 characters long',
           },
         }}
       />
@@ -120,9 +120,9 @@ export default function LoginForm({
                 <TextInput
                   style={styles.body}
                   secureTextEntry={true}
-                  placeholder="Şifreyi doğrulayın"
+                  placeholder="Confirm password"
                   onChangeText={(value) => onChange(value.trim())}
-                  onFocus={() => clearErrors('comfirmPassword')}
+                  onFocus={() => clearErrors('confirmPassword')}
                   value={value}
                   autoCapitalize="none"
                   placeholderTextColor={AppStyles.solidColor}
@@ -134,11 +134,11 @@ export default function LoginForm({
             rules={{
               required: {
                 value: true,
-                message: 'E-mail alanı boş bırakılamaz.',
+                message: 'E-mail is required.',
               },
               minLength: {
                 value: 6,
-                message: 'Şifreniz en az 6 karakterden oluşmalıdır',
+                message: 'Password must be at least 6 characters long',
               },
             }}
           />
@@ -157,7 +157,7 @@ export default function LoginForm({
           <Loading />
         ) : (
           <Text style={styles.loginText}>
-            {isNewUser ? 'KAYIT OL' : 'GİRİŞ'}
+            {isNewUser ? 'SIGN UP' : 'SIGN IN'}
           </Text>
         )}
       </TouchableOpacity>
@@ -168,7 +168,7 @@ export default function LoginForm({
               style={styles.subButton}
               onPress={() => resetPasswordModal()}
             >
-              <Text style={styles.subText}> Şifremi unuttum</Text>
+              <Text style={styles.subText}> Forget Password</Text>
             </TouchableOpacity>
             <Text style={styles.subText}> / </Text>
           </>
@@ -178,14 +178,14 @@ export default function LoginForm({
             style={styles.subButton}
             onPress={() => navigation.navigate('Login')}
           >
-            <Text style={styles.subText}>Giriş yap</Text>
+            <Text style={styles.subText}>Log In</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             style={styles.subButton}
             onPress={() => navigation.navigate('SignUp')}
           >
-            <Text style={styles.subText}>Kayıt Ol</Text>
+            <Text style={styles.subText}>Sign Up</Text>
           </TouchableOpacity>
         )}
       </View>

@@ -6,8 +6,8 @@ export default function validation(fieldName, value) {
       presence: true,
       email: {
         message: {
-          type: 'inValid',
-          message: 'Lütfen geçerli bir e-mail adresi girin',
+          type: 'invalid',
+          message: 'Invalid e-mail address.',
         },
       },
     },
@@ -17,7 +17,7 @@ export default function validation(fieldName, value) {
         minimum: 6,
         message: {
           type: 'minLenght',
-          message: 'Şifreniz en az 6 karakterden oluşmalıdır',
+          message: 'Password must be at least 6 characters long',
         },
       },
     },

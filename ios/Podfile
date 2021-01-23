@@ -3,12 +3,13 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'sillion' do
+target 'login_app' do
   config = use_native_modules!
-
+  pod 'Firebase/Analytics'
   use_react_native!(:path => config["reactNativePath"])
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  target 'sillionTests' do
+  target 'login_appTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +24,10 @@ target 'sillion' do
   end
 end
 
-target 'sillion-tvOS' do
-  # Pods for sillion-tvOS
+target 'login_app-tvOS' do
+  # Pods for login_app-tvOS
 
-  target 'sillion-tvOSTests' do
+  target 'login_app-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

@@ -9,7 +9,7 @@ import ResetPassword from '../components/resetPassword/ResetPassword';
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
-  const [modalVisible, setmodalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onSubmit = (data) => {
     dispatch(loginUser(data.email, data.password));
@@ -17,10 +17,10 @@ export default function LoginScreen({ navigation }) {
 
   const sendResetPasswordLink = (email) => {
     dispatch(resetPassword(email));
-    setmodalVisible(false);
+    setModalVisible(false);
   };
   const resetPasswordModal = () => {
-    setmodalVisible(!modalVisible);
+    setModalVisible(!modalVisible);
   };
 
   return (

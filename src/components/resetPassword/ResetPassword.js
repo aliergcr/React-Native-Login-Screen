@@ -11,16 +11,16 @@ import {
 } from 'react-native';
 import validation from '../validate/validate';
 
-export default function ResePassword({
+export default function ResetPassword({
   isDialogVisible,
   closeDialog,
   submitInput,
 }) {
-  const [email, setemail] = useState('');
-  const [emailError, setemailError] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
 
-  var cancelText = 'Çıkış';
-  var submitText = 'Gönder';
+  var cancelText = 'Cancel';
+  var submitText = 'Ok';
   cancelText = Platform.OS === 'ios' ? cancelText : cancelText.toUpperCase();
   submitText = Platform.OS === 'ios' ? submitText : submitText.toUpperCase();
 
@@ -31,7 +31,7 @@ export default function ResePassword({
       visible={isDialogVisible}
       onRequestClose={() => {
         closeDialog();
-        setemail('');
+        setEmail('');
       }}
     >
       <View style={styles.container}>
@@ -40,13 +40,12 @@ export default function ResePassword({
           activeOpacity={1}
           onPress={() => {
             closeDialog();
-            this.setState({ inputModal: '', openning: true });
           }}
         >
           <View style={styles.modal_container}>
             <View style={styles.modal_body}>
-              <Text style={styles.title_modal}>Şifre Sıfırlama</Text>
-              <Text>Lütfen kayıt olduğunuz E-mail adresini girin.</Text>
+              <Text style={styles.title_modal}>Reset Password</Text>
+              <Text>Please enter your e-mail address.</Text>
               <TextInput
                 style={styles.input_container}
                 placeholder="E-mail"
@@ -55,11 +54,11 @@ export default function ResePassword({
                 autoCapitalize="none"
                 underlineColorAndroid="transparent"
                 onChangeText={(value) => {
-                  setemail(value.trim());
-                  setemailError(validation('email', value.trim()));
+                  setEmail(value.trim());
+                  setEmailError(validation('email', value.trim()));
                 }}
                 onBlur={() => {
-                  setemailError(validation('email', email));
+                  setEmailError(validation('email', email));
                 }}
                 value={email}
               />
@@ -69,7 +68,7 @@ export default function ResePassword({
                 style={styles.touch_modal}
                 onPress={() => {
                   closeDialog();
-                  setemail('');
+                  setEmail('');
                 }}
               >
                 <Text style={styles.btn_modal_left}>{cancelText}</Text>
@@ -80,10 +79,11 @@ export default function ResePassword({
                 onPress={() => {
                   if (emailError == null) {
                     submitInput(email);
+                    setEmail('');
                   } else {
                     Alert.alert(
                       '',
-                      'Lütfen E-mail adresini kontrol edip tekrar deneyiniz.'
+                      'Please check your e-mail address and try again.'
                     );
                   }
                 }}

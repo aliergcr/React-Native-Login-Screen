@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -14,7 +13,6 @@ import SignUpScreen from './SignUpScreen';
 import { authUser } from '../redux/actions/authActions';
 import Loading from '../components/loading/Loading';
 import { AppStyles } from '../AppStyles';
-import AddDevice from './AddDevice';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -22,111 +20,15 @@ const Stack = createStackNavigator();
 export default function Navigator() {
   const dispatch = useDispatch();
   const { loading, login } = useSelector((state) => state.auth);
-  const [pageLoading, setpageLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     dispatch(authUser());
   }, []);
+
   useEffect(() => {
-    setpageLoading(loading);
+    setPageLoading(loading);
   }, [loading]);
-
-  const HomeStack = () => {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            title: 'Renk Seçimi',
-            headerTintColor: AppStyles.titleColor,
-            headerTitleStyle: {
-              fontSize: AppStyles.titleFontSize,
-              ...Platform.select({
-                android: { alignSelf: 'center' },
-              }),
-            },
-            headerStyle: {
-              backgroundColor: AppStyles.secondaryColor,
-            },
-          }}
-        />
-        {/* <Stack.Screen
-          name="AddDevice"
-          component={AddDevice}
-          options={{ title: 'Cihaz Ekle' }}
-        /> */}
-      </Stack.Navigator>
-    );
-  };
-
-  const ProfileStack = () => {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            title: 'Profil',
-            headerTintColor: AppStyles.titleColor,
-            headerTitleStyle: {
-              fontSize: AppStyles.titleFontSize,
-              ...Platform.select({
-                android: { alignSelf: 'center' },
-              }),
-            },
-            headerStyle: {
-              backgroundColor: AppStyles.secondaryColor,
-            },
-          }}
-        />
-        {/* <Stack.Screen
-          name="AddDevice"
-          component={AddDevice}
-          options={{ title: 'Cihaz Ekle' }}
-        /> */}
-      </Stack.Navigator>
-    );
-  };
-
-  const SettingsStack = () => {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            title: 'Ayarlar',
-            headerTintColor: AppStyles.titleColor,
-            headerTitleStyle: {
-              fontSize: AppStyles.titleFontSize,
-              ...Platform.select({
-                android: { alignSelf: 'center' },
-              }),
-            },
-            headerStyle: {
-              backgroundColor: AppStyles.secondaryColor,
-            },
-          }}
-        />
-        <Stack.Screen
-          name="AddDevice"
-          component={AddDevice}
-          options={{
-            title: 'Cihaz Ekle',
-            headerTintColor: AppStyles.titleColor,
-            headerTitleStyle: {
-              fontSize: AppStyles.titleFontSize,
-              //alignSelf: 'center',
-            },
-            headerStyle: {
-              backgroundColor: AppStyles.secondaryColor,
-            },
-          }}
-        />
-      </Stack.Navigator>
-    );
-  };
 
   const HomeTab = () => {
     return (
@@ -158,20 +60,20 @@ export default function Navigator() {
       >
         <Tab.Screen
           name="HomeStack"
-          component={HomeStack}
+          component={HomeScreen}
           options={{
-            title: 'Renk Seç',
+            title: 'Home',
           }}
         />
         <Tab.Screen
           name="ProfileStack"
-          component={ProfileStack}
-          options={{ title: 'Profil' }}
+          component={ProfileScreen}
+          options={{ title: 'Profile' }}
         />
         <Tab.Screen
           name="SettingsStack"
-          component={SettingsStack}
-          options={{ title: 'Ayarlar' }}
+          component={SettingsScreen}
+          options={{ title: 'Settings' }}
         />
       </Tab.Navigator>
     );

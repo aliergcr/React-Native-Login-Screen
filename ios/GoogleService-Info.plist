@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>440334477324-mipfi9lavteqlniin6ep0hje5o7b8pmq.apps.googleusercontent.com</string>
+	<string>439000684413-nb0oaojmnihon2nc67toeb3kqlki9alh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.440334477324-mipfi9lavteqlniin6ep0hje5o7b8pmq</string>
+	<string>com.googleusercontent.apps.439000684413-nb0oaojmnihon2nc67toeb3kqlki9alh</string>
 	<key>API_KEY</key>
-	<string>AIzaSyArsYw_11CUFhJEpaaUtnyd25eDvuIW3ME</string>
+	<string>AIzaSyAT8hYKktiLzVfWc87BYt1lxZnp4N6wWOU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>440334477324</string>
+	<string>439000684413</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.sillion</string>
+	<string>org.reactjs.native.example.login-app</string>
 	<key>PROJECT_ID</key>
-	<string>sillion-aa6df</string>
+	<string>loginapp-ab6a6</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sillion-aa6df.appspot.com</string>
+	<string>loginapp-ab6a6.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:440334477324:ios:36201dd1cc87664749a629</string>
-	<key>DATABASE_URL</key>
-	<string>https://sillion-aa6df-default-rtdb.firebaseio.com</string>
+	<string>1:439000684413:ios:279191fbbd8d3516169e14</string>
 </dict>
 </plist>

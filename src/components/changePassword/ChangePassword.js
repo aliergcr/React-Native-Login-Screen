@@ -16,14 +16,14 @@ export default function ChangePassword({
   closeDialog,
   submitInput,
 }) {
-  const [password, setpassword] = useState('');
-  const [newPassword, setnewPassword] = useState('');
-  const [confirmPassword, setconfirmPassword] = useState('');
-  const [newPasswordError, setnewPasswordError] = useState('');
-  const [passwordError, setpasswordError] = useState('');
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [newPasswordError, setNewPasswordError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  var cancelText = 'Çıkış';
-  var submitText = 'Onay';
+  var cancelText = 'Cancel';
+  var submitText = 'Ok';
 
   return (
     <Modal
@@ -32,7 +32,7 @@ export default function ChangePassword({
       visible={isModalVisible}
       onRequestClose={() => {
         closeDialog();
-        setpassword('');
+        setPassword('');
       }}
     >
       <View style={styles.container}>
@@ -45,45 +45,43 @@ export default function ChangePassword({
         >
           <View style={styles.modal_container}>
             <View style={styles.modal_body}>
-              <Text style={styles.title_modal}>Şifre Değiştirme</Text>
-              <Text>
-                Lütfen yeni şifrenizi girin (En az 6 karakterden oluşmalıdır).
-              </Text>
+              <Text style={styles.title_modal}>Change Password</Text>
+              <Text>Please enter your password (Min 6 character).</Text>
               <TextInput
                 style={styles.input_container}
-                placeholder="Şu an kullanılan şifre"
+                placeholder="Password"
                 // keyboardType="number-pad"
                 secureTextEntry={true}
                 autoCapitalize="none"
                 underlineColorAndroid="transparent"
                 onChangeText={(value) => {
-                  setpassword(value.trim());
-                  setpasswordError(validation('password', value.trim()));
+                  setPassword(value.trim());
+                  setPasswordError(validation('password', value.trim()));
                 }}
                 value={password}
               />
               <TextInput
                 style={styles.input_container}
-                placeholder="Yeni şifre"
+                placeholder="New Password"
                 // keyboardType="number-pad"
                 secureTextEntry={true}
                 autoCapitalize="none"
                 underlineColorAndroid="transparent"
                 onChangeText={(value) => {
-                  setnewPassword(value.trim());
-                  setnewPasswordError(validation('password', value.trim()));
+                  setNewPassword(value.trim());
+                  setNewPasswordError(validation('password', value.trim()));
                 }}
                 value={newPassword}
               />
               <TextInput
                 style={styles.input_container}
-                placeholder="Yeni şifreyi doğrulayın"
+                placeholder="Confirm Password"
                 //keyboardType="number-pad"
                 secureTextEntry={true}
                 autoCapitalize="none"
                 underlineColorAndroid="transparent"
                 onChangeText={(value) => {
-                  setconfirmPassword(value.trim());
+                  setConfirmPassword(value.trim());
                 }}
                 value={confirmPassword}
               />
@@ -93,9 +91,9 @@ export default function ChangePassword({
                 style={styles.touch_modal}
                 onPress={() => {
                   closeDialog();
-                  setpassword('');
-                  setnewPassword('');
-                  setconfirmPassword('');
+                  setPassword('');
+                  setNewPassword('');
+                  setConfirmPassword('');
                 }}
               >
                 <Text style={styles.btn_modal_left}>{cancelText}</Text>
@@ -112,14 +110,11 @@ export default function ChangePassword({
                     newPassword !== ''
                   ) {
                     submitInput(password, newPassword);
-                    setpassword('');
-                    setnewPassword('');
-                    setconfirmPassword('');
+                    setPassword('');
+                    setNewPassword('');
+                    setConfirmPassword('');
                   } else {
-                    Alert.alert(
-                      '',
-                      'Lütfen şifreyi kontrol edip tekrar deneyiniz.'
-                    );
+                    Alert.alert('', 'Please check your password.');
                   }
                 }}
               >

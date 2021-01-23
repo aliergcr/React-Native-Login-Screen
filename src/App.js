@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import Toast, { BaseToast } from 'react-native-toast-message';
-import SplashScreen from 'react-native-splash-screen';
 
 import { store } from './redux/store';
 import Navigator from './screens/Navigator';
@@ -29,9 +28,6 @@ const toastConfig = {
 };
 
 export default function App() {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
   return (
     <SafeAreaProvider>
       <>

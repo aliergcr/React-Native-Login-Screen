@@ -1,6 +1,6 @@
 import Toast from 'react-native-toast-message';
 import { Platform } from 'react-native';
-import { firebase, auth, database } from '../../config/config';
+import { auth } from '../../config/config';
 import {
   AUTH_USER_CREATE_FAIL,
   AUTH_USER_CREATE_SUCCESS,
@@ -18,7 +18,6 @@ import {
   AUTH_CHANGE_PASSWORD_INIT,
   AUTH_CHANGE_PASSWORD_SUCCESS,
 } from './actionTypes';
-import { fetchUserData } from './userActions';
 
 export const authUser = () => {
   return async (dispatch) => {
@@ -31,13 +30,12 @@ export const authUser = () => {
     }
     if (user) {
       dispatch({ type: AUTH_USER_SUCCESS, payload: user });
-      dispatch(fetchUserData());
     } else {
       dispatch({
         type: AUTH_USER_FAIL,
         payload: {
           type: 'auth/user-not-login',
-          message: 'Lütfen giriş yapın',
+          message: 'Please Log in',
         },
       });
     }
@@ -45,7 +43,7 @@ export const authUser = () => {
 };
 
 export const changePassword = (password, newPassword) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch({ type: AUTH_CHANGE_PASSWORD_INIT });
     let firebaseUser = await auth().currentUser;
     let user;
@@ -58,8 +56,8 @@ export const changePassword = (password, newPassword) => {
       Toast.show({
         type: 'error',
         position: 'top',
-        text1: 'HATA',
-        text2: 'Şifre yanlış, lütfen şifrenizi kontrol edip tekrar deneyiniz.',
+        text1: 'Error',
+        text2: 'Wrong password, Please check your password and try again.',
         visibilityTime: 3000,
         autoHide: true,
         topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -77,8 +75,8 @@ export const changePassword = (password, newPassword) => {
       Toast.show({
         type: 'success',
         position: 'top',
-        text1: 'Başarılı',
-        text2: 'Şifre değişirme işlemi başarıyla gerçekleştirildi.',
+        text1: 'Success',
+        text2: 'Password changed successfully.',
         visibilityTime: 3000,
         autoHide: true,
         topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -90,9 +88,8 @@ export const changePassword = (password, newPassword) => {
       Toast.show({
         type: 'error',
         position: 'top',
-        text1: 'HATA',
-        text2:
-          'Lütfen uygulamadan çıkış yapıp e-mail ve şifrenizle tekrar giriş yaptıktan sonra deneyiniz.',
+        text1: 'Error',
+        text2: 'Please first logout and try again.',
         visibilityTime: 3000,
         autoHide: true,
         topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -114,9 +111,9 @@ export const resetPassword = (email) => {
       Toast.show({
         type: 'success',
         position: 'top',
-        text1: 'Dikkat',
+        text1: 'Attention',
         text2:
-          'Şifre sıfırlama linki adresinize gönderildi, lütfen e-mail adresinizi kontrol edin.',
+          'Your password reset link send to your e-mail address, check your e-mail.',
         visibilityTime: 3000,
         autoHide: true,
         topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -129,8 +126,8 @@ export const resetPassword = (email) => {
         Toast.show({
           type: 'error',
           position: 'top',
-          text1: 'HATA',
-          text2: 'E-mail adresiyle uyuşan hesap bulunamadı.',
+          text1: 'Error',
+          text2: 'E-mail address is not found.',
           visibilityTime: 3000,
           autoHide: true,
           topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -142,8 +139,8 @@ export const resetPassword = (email) => {
         Toast.show({
           type: 'error',
           position: 'top',
-          text1: 'HATA',
-          text2: 'E-mail adresini kontrol edip tekrar deneyiniz.',
+          text1: 'Error',
+          text2: 'Please check your e-mail address.',
           visibilityTime: 3000,
           autoHide: true,
           topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -176,13 +173,14 @@ export const loginUser = (email, password) => {
       const { user } = await auth().signInWithEmailAndPassword(email, password);
       userData = user;
     } catch (error) {
+      console.log(error);
       switch (error.code) {
         case 'auth/invalid-email':
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2: 'Lütfen geçerli bir e-mail adresi girin.',
+            text1: 'Error',
+            text2: 'E-mail address is invalid.',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -194,16 +192,35 @@ export const loginUser = (email, password) => {
             type: AUTH_USER_LOGIN_FAIL,
             payload: {
               type: 'auth/invalid-email',
-              message: 'Lütfen geçerli bir e-mail adresi girin.',
+              message: 'invalid e-mail.',
             },
           });
-          break;
+        case 'auth/user-not-found':
+          Toast.show({
+            type: 'error',
+            position: 'top',
+            text1: 'Error',
+            text2: 'User not found, please first sign up.',
+            visibilityTime: 3000,
+            autoHide: true,
+            topOffset: Platform.OS == 'ios' ? 40 : 30,
+            onShow: () => {},
+            onHide: () => {},
+            onPress: () => {},
+          });
+          return dispatch({
+            type: AUTH_USER_LOGIN_FAIL,
+            payload: {
+              type: 'auth/invalid-email',
+              message: 'invalid e-mail.',
+            },
+          });
         case 'auth/wrong-password':
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2: 'Yanlış şifre, lütfen tekrar deneyin.',
+            text1: 'Error',
+            text2: 'Wrong password, please try again.',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -215,17 +232,16 @@ export const loginUser = (email, password) => {
             type: AUTH_USER_LOGIN_FAIL,
             payload: {
               type: 'auth/wrong-password',
-              message: 'Yanlış şifre, lütfen tekrar deneyin',
+              message: 'Wrong password, please try again.',
             },
           });
-          break;
-
         default:
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2: 'Lütfen bilgileri kontrol ederek tekrar deneyin.',
+            text1: 'Error',
+            text2:
+              'Please check your e-mail address and password then try again.',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -237,14 +253,13 @@ export const loginUser = (email, password) => {
             type: AUTH_USER_LOGIN_FAIL,
             payload: {
               type: 'auth/',
-              message: 'Lütfen bilgileri kontrol ederek tekrar deneyin.',
+              message:
+                'Please check your e-mail address and password then try again.',
             },
           });
-          break;
       }
     }
-    dispatch({ type: AUTH_USER_LOGIN_SUCCESS, payload: userData });
-    return dispatch(fetchUserData());
+    return dispatch({ type: AUTH_USER_LOGIN_SUCCESS, payload: userData });
   };
 };
 
@@ -258,22 +273,14 @@ export const createUser = (email, password) => {
         password
       );
       userData = user;
-      await database().ref(`users/${user.uid}`).set({
-        email: email,
-        createdAt: user.metadata.creationTime,
-        userId: user.uid,
-        token: null,
-        deviceId: null,
-      });
     } catch (error) {
       switch (error.code) {
         case 'auth/email-already-in-use':
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2:
-              'E-mail kullanımda, daha önce kaydolduysanız giriş sayfasından giriş yapabilirsiniz.',
+            text1: 'Error',
+            text2: 'E-mail address is already in use.',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -285,16 +292,15 @@ export const createUser = (email, password) => {
             type: AUTH_USER_CREATE_FAIL,
             payload: {
               type: 'auth/email-already-in-use',
-              message: 'Lütfen geçerli bir e-mail adresi girin.',
+              message: 'E-mail address is already in use.',
             },
           });
-          break;
         case 'auth/invalid-email':
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2: 'E-mail geçersiz, .',
+            text1: 'Error',
+            text2: 'Invalid E-mail address',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -305,17 +311,16 @@ export const createUser = (email, password) => {
           return dispatch({
             type: AUTH_USER_CREATE_FAIL,
             payload: {
-              type: 'auth/email-already-in-use',
-              message: 'Lütfen geçerli bir e-mail adresi girin.',
+              type: 'auth/invalid-email',
+              message: 'Invalid E-mail address.',
             },
           });
-          break;
         case 'auth/invalid-password':
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2: 'Geçersiz şifre, lütfen tekrar deneyin.',
+            text1: 'Error',
+            text2: 'Wrong password.',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -327,17 +332,17 @@ export const createUser = (email, password) => {
             type: AUTH_USER_CREATE_FAIL,
             payload: {
               type: 'auth/wrong-password',
-              message: 'Yanlış şifre, lütfen tekrar deneyin',
+              message: 'Wrong Password',
             },
           });
-          break;
 
         default:
           Toast.show({
             type: 'error',
             position: 'top',
-            text1: 'HATA',
-            text2: 'Lütfen bilgileri kontrol ederek tekrar deneyin.',
+            text1: 'Error',
+            text2:
+              'Please check your e-mail address and password then try again.',
             visibilityTime: 3000,
             autoHide: true,
             topOffset: Platform.OS == 'ios' ? 40 : 30,
@@ -349,10 +354,10 @@ export const createUser = (email, password) => {
             type: AUTH_USER_CREATE_FAIL,
             payload: {
               type: 'auth/',
-              message: 'Lütfen bilgileri kontrol ederek tekrar deneyin.',
+              message:
+                'Please check your e-mail address and password then try again.',
             },
           });
-          break;
       }
     }
 
