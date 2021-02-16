@@ -28,7 +28,9 @@
 
 - 1- clone app
 - 2- `npm install` in terminal project directory
-- 3- For IOS => go to /ios directory and run  => `npx pod-install`
+- 3- Install and configure [@react-native-firebase](https://rnfirebase.io/#installation)
+- 4- For IOS => go to /ios directory and run  => `npx pod-install`
+
 
 Don't forget [Create a Firebase project](https://console.firebase.google.com) and configure config.js file in project.
 
