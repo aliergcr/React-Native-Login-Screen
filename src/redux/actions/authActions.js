@@ -22,22 +22,22 @@ import {
 export const authUser = () => {
   return async (dispatch) => {
     dispatch({ type: AUTH_USER_INIT });
-    let user;
     try {
-      await auth().onAuthStateChanged((res) => (user = res));
+      await auth().onAuthStateChanged((user) => {
+        if (user) {
+          return dispatch({ type: AUTH_USER_SUCCESS, payload: user });
+        } else {
+          return dispatch({
+            type: AUTH_USER_FAIL,
+            payload: {
+              type: 'auth/user-not-login',
+              message: 'Please Log in',
+            },
+          });
+        }
+      });
     } catch (error) {
       dispatch({ type: AUTH_USER_FAIL, payload: error });
-    }
-    if (user) {
-      dispatch({ type: AUTH_USER_SUCCESS, payload: user });
-    } else {
-      dispatch({
-        type: AUTH_USER_FAIL,
-        payload: {
-          type: 'auth/user-not-login',
-          message: 'Please Log in',
-        },
-      });
     }
   };
 };
